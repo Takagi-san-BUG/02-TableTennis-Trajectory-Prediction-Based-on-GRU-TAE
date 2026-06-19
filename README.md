@@ -229,6 +229,34 @@ python src/GRU-TAE/3dpaint.py
 
 ---
 
+## 结果展示
+
+下图为 GRU-TAE 在测试集上的轨迹补全效果，全部由 `predict.py` 自动生成并保存至 `logs/`。每张图为一条独立测试轨迹的 3D 可视化对比：
+
+- **灰色虚线**：真实完整轨迹（ground truth）
+- **蓝色实线 + 圆点**：输入给模型的观测部分（前 60 帧）
+- **红色实线 + 方块**：模型预测补全的部分（后 140 帧）
+
+<div align="center">
+
+| 样本 0 | 样本 1 | 样本 2 | 样本 3 |
+|:---:|:---:|:---:|:---:|
+| ![](logs/test_sample_0.png) | ![](logs/test_sample_1.png) | ![](logs/test_sample_2.png) | ![](logs/test_sample_3.png) |
+| 样本 4 | 样本 5 | 样本 6 | 样本 7 |
+| ![](logs/test_sample_4.png) | ![](logs/test_sample_5.png) | ![](logs/test_sample_6.png) | ![](logs/test_sample_7.png) |
+| 样本 8 | 样本 9 | 样本 10 | 样本 11 |
+| ![](logs/test_sample_8.png) | ![](logs/test_sample_9.png) | ![](logs/test_sample_10.png) | ![](logs/test_sample_11.png) |
+| 样本 12 | 样本 13 | 样本 14 | 样本 15 |
+| ![](logs/test_sample_12.png) | ![](logs/test_sample_13.png) | ![](logs/test_sample_14.png) | ![](logs/test_sample_15.png) |
+| 样本 16 | 样本 17 | 样本 18 | 样本 19 |
+| ![](logs/test_sample_16.png) | ![](logs/test_sample_17.png) | ![](logs/test_sample_18.png) | ![](logs/test_sample_19.png) |
+
+</div>
+
+可以观察到，红色预测曲线在大部分样本上能较好地延续蓝色观测部分的运动趋势，并贴合灰色真实轨迹，说明模型成功学到了乒乓球飞行与弹跳的时序规律。
+
+---
+
 ## 模型文件
 
 `models/` 目录下保存了 28 个训练过程中产生的 checkpoint（`model_1.pth` ~ `model_28.pth`），按训练过程中损失下降的时刻依次保存，编号越大通常代表训练越充分（但也可能因过拟合导致泛化性能下降）。
